@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>SecHex.Core</RootNamespace>
+    <Authors>SecHex Educational Project</Authors>
+    <Description>Biblioteca principal com serviços de segurança, spoofing de identificadores e limpeza para fins de estudo.</Description>
+  </PropertyGroup>
+
+</Project>

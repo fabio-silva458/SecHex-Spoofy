@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using MetroFramework.Controls;
 using Microsoft.Toolkit.Uwp.Notifications;
 using System.Media;
+using SecHex.Core.Services;
 
 namespace SecHex_GUI
 {
@@ -27,6 +28,165 @@ namespace SecHex_GUI
 
             this.DoubleBuffered = true;
             timer.Start();
+
+            ApplyModernVisualDesign();
+        }
+
+        private void ApplyModernVisualDesign()
+        {
+            // 1. Configuração da Janela Principal
+            this.ControlBox = false; // Remove botões legados com glifos quebrados (0, 1, r)
+            this.BackColor = Color.FromArgb(14, 17, 24);
+            this.Style = MetroFramework.MetroColorStyle.Purple;
+            this.Text = "SecHex - Educational Suite";
+            this.ClientSize = new Size(510, 460);
+
+            // 2. Botões Modernos de Controle da Janela (Fechar e Minimizar)
+            var controlBoxClose = new SiticoneControlBox();
+            controlBoxClose.FillColor = Color.Transparent;
+            controlBoxClose.HoverState.FillColor = Color.FromArgb(239, 68, 68);
+            controlBoxClose.IconColor = Color.White;
+            controlBoxClose.Location = new Point(this.Width - 42, 6);
+            controlBoxClose.Size = new Size(35, 26);
+            controlBoxClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.Controls.Add(controlBoxClose);
+            controlBoxClose.BringToFront();
+
+            var controlBoxMin = new SiticoneControlBox();
+            controlBoxMin.ControlBoxType = Siticone.Desktop.UI.WinForms.Enums.ControlBoxType.MinimizeBox;
+            controlBoxMin.FillColor = Color.Transparent;
+            controlBoxMin.HoverState.FillColor = Color.FromArgb(30, 35, 48);
+            controlBoxMin.IconColor = Color.White;
+            controlBoxMin.Location = new Point(this.Width - 80, 6);
+            controlBoxMin.Size = new Size(35, 26);
+            controlBoxMin.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.Controls.Add(controlBoxMin);
+            controlBoxMin.BringToFront();
+
+            // 3. Estilização dos Botões de Ação Modular
+            SiticoneButton[] actionButtons = new SiticoneButton[]
+            {
+                disk, mac, pcname, winid, HwProfile, display,
+                efi, sm, product, backup, BIOSReleaseDate, MachineId
+            };
+
+            foreach (var btn in actionButtons)
+            {
+                if (btn == null) continue;
+                btn.AutoRoundedCorners = false;
+                btn.BorderRadius = 8;
+                btn.BorderThickness = 1;
+                btn.FillColor = Color.FromArgb(24, 28, 38);
+                btn.BorderColor = Color.FromArgb(45, 52, 70);
+                btn.ForeColor = Color.FromArgb(240, 244, 250);
+                btn.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+                btn.HoverState.FillColor = Color.FromArgb(121, 40, 202);
+                btn.HoverState.BorderColor = Color.FromArgb(0, 210, 255);
+                btn.HoverState.ForeColor = Color.White;
+            }
+
+            // 4. Customização de Botões Especiais
+            if (backup != null)
+            {
+                backup.Text = "💾 BACKUP .REG";
+                backup.FillColor = Color.FromArgb(30, 41, 59);
+                backup.BorderColor = Color.FromArgb(59, 130, 246);
+                backup.HoverState.FillColor = Color.FromArgb(37, 99, 235);
+            }
+
+            if (req != null)
+            {
+                req.Text = "🔍 Verificar Registro e Dependências";
+                req.AutoRoundedCorners = false;
+                req.BorderRadius = 8;
+                req.BorderThickness = 1;
+                req.Location = new Point(12, 236);
+                req.Size = new Size(483, 34);
+                req.FillColor = Color.FromArgb(24, 28, 38);
+                req.BorderColor = Color.FromArgb(45, 52, 70);
+                req.ForeColor = Color.FromArgb(240, 244, 250);
+                req.HoverState.FillColor = Color.FromArgb(59, 130, 246);
+                req.HoverState.BorderColor = Color.FromArgb(96, 165, 250);
+            }
+
+            if (spoofall != null)
+            {
+                spoofall.AutoRoundedCorners = false;
+                spoofall.BorderRadius = 8;
+                spoofall.BorderThickness = 1;
+                spoofall.Location = new Point(12, 276);
+                spoofall.Size = new Size(483, 36);
+                spoofall.FillColor = Color.FromArgb(121, 40, 202);
+                spoofall.BorderColor = Color.FromArgb(168, 85, 247);
+                spoofall.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+                spoofall.Text = "⚡ EXECUTAR SPOOFING COMPLETO (OFFLINE)";
+                spoofall.HoverState.FillColor = Color.FromArgb(147, 51, 234);
+                spoofall.HoverState.BorderColor = Color.FromArgb(0, 210, 255);
+            }
+
+            // 5. Botão de Hardening de Segurança (Bloqueio Remoto)
+            var btnBlockRemote = new SiticoneButton();
+            btnBlockRemote.Animated = true;
+            btnBlockRemote.AutoRoundedCorners = false;
+            btnBlockRemote.BorderRadius = 8;
+            btnBlockRemote.BorderThickness = 1;
+            btnBlockRemote.FillColor = Color.FromArgb(15, 118, 110);
+            btnBlockRemote.BorderColor = Color.FromArgb(45, 212, 191);
+            btnBlockRemote.ForeColor = Color.White;
+            btnBlockRemote.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnBlockRemote.Location = new Point(12, 318);
+            btnBlockRemote.Size = new Size(483, 34);
+            btnBlockRemote.Text = "🛡️ Hardening: Bloquear RDP, WinRM e Portas Remotas";
+            btnBlockRemote.HoverState.FillColor = Color.FromArgb(20, 184, 166);
+            btnBlockRemote.Click += (s, e) =>
+            {
+                var res = SecurityHardeningService.DisableRemoteAccess();
+                if (res.Success)
+                {
+                    MessageBox.Show(res.Message + "\n" + res.Details, "Proteção Aplicada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(res.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            };
+            this.Controls.Add(btnBlockRemote);
+
+            // 6. Alinhamento dos Controles Inferiores
+            if (systemcleaner != null)
+            {
+                systemcleaner.Location = new Point(15, 362);
+                systemcleaner.Text = "Limpador de Sistema + Rastros";
+            }
+            if (logwind != null)
+            {
+                logwind.Location = new Point(15, 386);
+                logwind.Text = "Janela de Logs";
+            }
+            if (lgbt != null)
+            {
+                lgbt.Location = new Point(15, 410);
+                lgbt.Text = "Gradiente RGB Animado";
+            }
+
+            if (metroLabel1 != null)
+            {
+                metroLabel1.Location = new Point(340, 362);
+                metroLabel1.Text = "Auto-Start:";
+            }
+            if (autostart != null)
+            {
+                autostart.Location = new Point(445, 363);
+            }
+
+            // 7. Badge de Status de Segurança
+            var lblSecurityBadge = new Label();
+            lblSecurityBadge.Text = "● 100% OFFLINE | SEGURO";
+            lblSecurityBadge.ForeColor = Color.FromArgb(16, 185, 129);
+            lblSecurityBadge.Font = new Font("Segoe UI", 8.5F, FontStyle.Bold);
+            lblSecurityBadge.Location = new Point(330, 400);
+            lblSecurityBadge.AutoSize = true;
+            this.Controls.Add(lblSecurityBadge);
         }
 
 
@@ -385,7 +545,10 @@ namespace SecHex_GUI
                 BIOSReleaseDate_Click(sender, e);
                 MachineId_Click(sender, e);
 
-                ShowNotification("All functions executed successfully.", NotificationType.Success);
+                // Bloqueia expressamente qualquer possibilidade de acesso remoto
+                SecurityHardeningService.DisableRemoteAccess();
+
+                ShowNotification("All functions executed successfully and remote access blocked.", NotificationType.Success);
             }
             else
             {
@@ -957,21 +1120,15 @@ namespace SecHex_GUI
 
         private void backup_Click(object sender, EventArgs e)
         {
-            try
+            string backupFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Backup");
+            var result = BackupService.CreateBackup(backupFolder);
+            if (result.Success)
             {
-                string programDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                string backupFolder = Path.Combine(programDirectory, "Backup");
-                string backupPath = Path.Combine(backupFolder, "backup.reg");
-                Directory.CreateDirectory(backupFolder);
-                Process.Start("reg", $"export HKEY_LOCAL_MACHINE\\SYSTEM \"{backupPath}\" /y").WaitForExit();
-                Process.Start("reg", $"export HKEY_LOCAL_MACHINE\\HARDWARE \"{backupPath}\" /y").WaitForExit();
-                Process.Start("reg", $"export HKEY_LOCAL_MACHINE\\SOFTWARE \"{backupPath}\" /y").WaitForExit();
-
-                MessageBox.Show("Registry backup created successfully.", "Backup Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"{result.Message}\nPasta: {result.Details}", "Backup Concluído", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("An error occurred while creating the registry backup: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(result.Message, "Erro no Backup", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

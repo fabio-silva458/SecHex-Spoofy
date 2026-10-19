@@ -1,152 +1,113 @@
-# SecHex-Spoofy [1.5.8] [![Github All Releases](https://img.shields.io/github/downloads/SecHex/SecHex-Spoofy/total)]()
+# SecHex-Spoofy 🔑︎
 
-Simple HWID-Changer 🔑︎ 
-Some Lines of the CLI Version are from @LockBlock-dev
+[![Downloads](https://img.shields.io/github/downloads/SecHex/SecHex-Spoofy/total)](https://github.com/SecHex/SecHex-Spoofy)
+[![Plataforma](https://img.shields.io/badge/Plataforma-Windows%2010%20%7C%2011-blue.svg)](https://microsoft.com)
+[![Framework](https://img.shields.io/badge/.NET-6.0--windows-purple.svg)](https://dotnet.microsoft.com/)
+[![Finalidade](https://img.shields.io/badge/Finalidade-Educacional-brightgreen.svg)](#aviso-educacional-e-finalidade-de-estudo-)
+[![Segurança](https://img.shields.io/badge/Acesso%20Remoto-Bloqueado-red.svg)](#-segurança-e-bloqueio-de-acesso-remoto)
 
+Ferramenta didática para estudo de identificadores de hardware (HWID), telemetria do sistema operacional Windows e mecanismos de segurança defensiva.
 
+---
 
-**Windows 11** Version 10.0.22621 Build 22621 ✅                                      
-**Windows 10** Version 22H2 Build 19045.2965 ✅
+### 🎓 Aviso Educacional e Finalidade de Estudo
 
-I am currently still learning, and the spoofer is far from being 100% perfect. But I'm doing my best. 
+> **IMPORTANTE:** Este projeto foi desenvolvido **estritamente para fins educacionais, de pesquisa acadêmica e aprendizado** sobre a arquitetura interna do Microsoft Windows, estruturas do Registro, chamadas WMI, identificadores de rede e funcionamento de telemetrias.
 
+---
 
-# Functions ⚡
-+ **Disk Spoofing** - [18.05.23]                           
-    • Retrieves SCSI ports and buses information from the Windows registry.                           
-    • Checks if the device type is a disk peripheral.                           
-    • Generates random identifiers and serial numbers for the disk peripheral.                                                 
-    • Updates the registry values for the disk peripheral with the new identifiers and serial numbers.
-                                            
-+ **Guid Spoofing** - [18.05.23]                           
-    • Generates new GUIDs (Globally Unique Identifiers) for various registry keys.                           
-    • Updates the HwProfileGuid, MachineGuid, and MachineId registry values with new GUIDs.                           
-    • Generates a random BIOS release date.                           
-                                            
-+ **PC-name Spoofing** - [18.05.23]                           
-    • Spoofs the computer name by updating various registry keys.                           
-    • Retrieves the original computer name from the registry.                           
-    • Generates a random new computer name.                           
-    • Updates the registry values for ComputerName, ActiveComputerName, Hostname, and NV Hostname.                           
-                                              
-+ **MAC ID Spoofing** - [19.05.23]                           
-    • Attempts to spoof the MAC address of network adapters.                           
-    • Retrieves network adapters information from the Windows registry.                           
-    • Generates a random MAC address.                                                    
-    • Updates the registry values for the MAC address with the new spoofed address.                           
-    • Disables and enables the local area connection to apply the changes.
-                                                                           
-+ **Ubisoft cache cleaner** - [19.05.23]                           
-    • Cleans the Cache of Ubisoft
-                                           
-+ **Valorant cache cleaner** - [19.05.23]                           
-    • Cleans the Cache of Riot Games
-                                         
-+ **Installation ID Spoofing** - [26.05.23]
-    • Attempts to spoof the Windows ID by changing the MachineGuid registry value.                           
-    • Retrieves the current MachineGuid value from the registry.                           
-    • Generates a new random spoofed MachineGuid.                           
-    • Saves the before and after log information.                           
-    • Updates the registry value with the spoofed MachineGuid.
-                                                 
-+ **Spoof EFI Bootloader** - [26.05.23]                           
-    • Opens the registry key for EFI variables.                           
-    • Retrieves the current EFI Variable ID from the registry.                           
-    • Generates a new random EFI Variable ID.                           
-    • Updates the registry value with the new EFI Variable ID.                           
-                                                      
-+ **Spoof SMBIOS** - [26.05.23]                           
-    • Opens the registry key for SMBIOS data.                           
-    • Retrieves the current SystemSerialNumber from the registry.                           
-    • Generates a new random SystemSerialNumber.                           
-    • Updates the registry value with the new SystemSerialNumber.                           
-                               
-+ **Get all System informations** *[New]* - [27.05.23]                           
-    • Get all System informations.
-                                 
-+ **Registry Checker** *[New]* - [07.06.23]                           
-    • Defines an array of registry entries to check.                           
-    • Checks if the registry keys specified in the array exist.                           
-    • Creates a list of missing registry entries.                           
-    • Displays an error message with the missing entries, if any.                           
-    • Displays a success message if all registry entries are found.
-                                                    
-+ **Log System** *[New]* (testing) - [10.06.23]                           
-    • Log every Change in a .txt
-                          
-+ **Backup System** *[New]* (testing) - [13.06.23]                           
-    • Create a Backup as .reg
-                           
-+ **Product ID Spoofing** *[New]* (testing) - [14.06.23]                                                
-    • Opens the registry key "SOFTWARE\Microsoft\Windows NT\CurrentVersion" under the LocalMachine hive.                           
-    • Retrieves the current value of the "ProductId" registry entry.                           
-    • Generates a new random product ID using the RandomIdprid(20) method.                           
-    • Sets the registry value of "ProductId" to the new generated product ID.                                                                       
+## 💻 Compatibilidade
 
-+ **Display Spoofing** *[New]* (testing) - [15.06.23]                           
-    • Spoofs display settings by modifying the registry.                          
-    • Opens the registry key for display settings.                          
-    • Generates a random display ID.                          
-    • Updates the registry values for MRU0, MRU1, MRU2, MRU3, and MRU4.                          
-                       
+* **Windows 11** (Versão 22H2 / Builds 22621+) ✅
+* **Windows 10** (Versão 22H2 / Builds 19045+) ✅
 
-+ **SecHex Cleaner** *[New]* (testing) - [28.06.23]                           
-    • DNS Flush                          
-    • Temp Cleaner                          
-    • Windows Logs
-    • Win Temp                      
-    • TCP Reset                      
-    • Chrome Cookies                       
-    • Recent Documents                       
-    • Reset Connection (fix the mac spoofing issue)                    
-    • Trace Cleaner                    
-    • Anti-Cheat-Terminator [Fortnite, Valorant, FiveM...]                    
-    • Unlink Xbox                    
-    • Unlink Discord                              
+---
 
-                          
-                          
+## 🛡️ Segurança e Bloqueio de Acesso Remoto
 
-**Design Update** - 20.05.23
+Para garantir a privacidade e segurança total da máquina durante a execução:
 
-# Milestones 🏆
-**5 Stars** - ***EFI*** ✅                             
-**10 Stars** - ***SMBIOS***  ✅                                                                 
-**20+ Stars** - ***Spoofer with GUI*** ✅       
-**50+ Stars** - ***GUI Changes*** ✅                        
-**100+ Stars** - ***GUI Changes + Code overhaul and every 10 stars a update!*** ✅                             
-**500+ Stars** - ***Kernel Integration*** ❌                       
-↳ (Currently, @toto, @Starcharms, and I are working on the Kernel Integration. However, this process takes time. We are not merely adding an DMIEDIT edit executed by the spoofer; instead, we are developing a complete driver that communicates with Spoofy, supporting both Win10 and Win11.)
+* **100% Offline e Local**: O aplicativo não realiza chamadas externas, não abre portas na rede e não possui telemetria oculta.
+* **Desativação de Área de Trabalho Remota (RDP)**: Configura `fDenyTSConnections = 1` no Registro para impedir conexões RDP.
+* **Desativação de Assistência Remota**: Define `fAllowToGetHelp = 0` no Registro.
+* **Desativação de Serviços Remotos**: Para e desativa os serviços `RemoteRegistry` (Registro Remoto), `WinRM` (Gerenciamento Remoto via PowerShell) e `TermService`.
+* **Regras de Bloqueio no Firewall do Windows**: Cria regras ativas bloqueando o tráfego de entrada nas portas **3389** (RDP) e **5985/5986** (WinRM).
 
-▰▰▰▰▰▰▰▰▰▰▱▱▱ 75% Finish ❤️                          
-            
+---
 
+## 🏛️ Arquitetura do Projeto
 
+O projeto foi refatorado e organizado em uma arquitetura modular moderna:
 
-# GUI & CMD PREVIEW 🏆
-[No Updates for the CLI Version!]
-![Screenshot 2023-12-11 191951 (1)](https://github.com/SecHex/SecHex-Spoofy/assets/96635023/22ad94a2-f003-49cb-b0ef-fea0160bd093)
+```
+SecHex-Spoofy/
+├── SecHex.sln                   # Solução unificada para Visual Studio / VS Code
+├── SecHex.Core/                 # Biblioteca central compartilhada (.NET 6 Windows)
+│   ├── Helpers/                 # ProcessHelper, RandomHelper (MAC LAA válido)
+│   ├── Models/                  # SystemInformation, OperationResult
+│   └── Services/                # Serviços de Spoofing, Limpeza, Backup e Segurança
+├── SecHex-CMDLINE/RPZ-HWID/     # Versão de linha de comando (CLI interativo)
+└── SecHex-GUI/SecHex-GUI/       # Interface gráfica desktop em Windows Forms
+```
 
+---
 
+## ⚡ Funcionalidades
 
+### 1. Modificação de Identificadores (Spoofing)
+* **Discos e Controladoras SCSI**: Atualiza identificadores seriais de periféricos de disco no Registro (`HARDWARE\DEVICEMAP\Scsi` e `DiskPeripheral`).
+* **GUIDs de Sistema e Perfil**: Gera novos GUIDs para `HwProfileGuid`, `MachineGuid` e `MachineId`.
+* **Nome do Computador (Hostname)**: Gera um novo nome randômico e atualiza as chaves `ComputerName`, `ActiveComputerName` e parâmetros do `Tcpip`.
+* **Endereço MAC**: Gera endereços MAC válidos com o bit local (LAA) habilitado e reinicia o adaptador de rede correspondente para aplicar a mudança.
+* **Installation ID & Windows Product ID**: Atualiza os IDs de instalação do Windows em `SOFTWARE\Microsoft\Windows NT\CurrentVersion`.
+* **Variável EFI**: Gera novo identificador GUID para variáveis EFI em `SYSTEM\CurrentControlSet\Control\Nsi`.
+* **Serial SMBIOS**: Altera o valor de `SystemSerialNumber` em `HARDWARE\DESCRIPTION\System\BIOS`.
+* **Adaptadores de Vídeo (GPU)**: Identifica dinamicamente os adaptadores da classe Display e atualiza descrições de hardware.
 
-# Contributors ❤️
-Contributors get a special Role our discord Server. Just create a Ticket and send proof.                                         
-Cheers!                                            .gg/SecHex
+### 2. Limpeza de Sistema e Caches
+* **Limpeza Real de Logs de Eventos**: Executa `wevtutil cl` limpando de fato os canais *Application*, *Security*, *System* e *Setup*.
+* **Flush de Cache DNS**: Executa `ipconfig /flushdns`.
+* **Arquivos Temporários**: Limpeza de resíduos em `%TEMP%` e `C:\Windows\Temp`.
+* **Caches de Jogos**: Limpeza de arquivos de cache do inicializador da Ubisoft e do Valorant.
+* **Redefinição da Pilha de Rede**: Reseta Winsock, TCP/IP e renova IP, com reaplicação imediata dos bloqueios contra acessos remotos.
 
+### 3. Diagnóstico e Backup
+* **Auditoria de Hardware Nativa**: Leitura e exibição segura de CPU, Memória Total (GB), adaptadores de vídeo e endereços MAC sem caminhos inválidos de Linux.
+* **Sistema de Backup Atômico**: Salva cópias das chaves alteradas em pastas organizadas por carimbo de data/hora (`yyyyMMdd_HHmmss`) em arquivos `.reg` independentes, permitindo fácil restauração.
 
+---
 
-# Disclaimer ⚠️
-Please read this disclaimer carefully before using the HWID Spoofing Tool ("Tool") available on this GitHub site. By accessing or using the Tool, you agree to be bound by this disclaimer.
+## 🚀 Como Compilar e Executar
 
-Use at Your Own Risk: The HWID Spoofing Tool is provided for educational and informational purposes only. It is intended to demonstrate the concept of HWID spoofing and its potential applications. However, it is important to understand that the use of this Tool may violate the terms of service or terms of use of certain software or services. Use this Tool at your own risk.
+### Pré-requisitos
+* **SDK do .NET 6.0** (ou superior) para Windows.
+* Privilégios de **Administrador** (necessário para ler e gravar em seções protegidas do Registro e configurar o Firewall).
 
-No Guarantees: Although the HWID Spoofing Tool has been tested on a virtual machine and efforts have been made to ensure its functionality, the Tool is provided "as is" without any guarantees or warranties of any kind. I cannot guarantee that the Tool will work flawlessly on all systems or that it will not cause any issues or damages.
+### Compilação via Terminal
+```powershell
+# Restaurar dependências e compilar a solução completa
+dotnet build SecHex.sln -c Release
 
-Limited Liability: I specifically DISCLAIM LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES arising out of the use or inability to use the HWID Spoofing Tool. In no event shall I be liable for any loss or damage suffered as a result of the use or misuse of the Tool, including but not limited to any direct, indirect, special, or consequential damages.
+# Executar a versão CLI
+dotnet run --project SecHex-CMDLINE/RPZ-HWID/RPZ-HWID.csproj
 
-Responsibility: You are solely responsible for your actions and the consequences that may arise from the use of the HWID Spoofing Tool. It is your responsibility to ensure that your use of the Tool complies with all applicable laws, regulations, and terms of service or terms of use.
+# Executar a versão GUI
+dotnet run --project SecHex-GUI/SecHex-GUI/SecHex-GUI.csproj
+```
 
-Legal Implications: The use of HWID spoofing tools may be illegal or against the terms of service of certain software or services. It is your responsibility to understand and comply with the laws and terms governing the use of such tools in your jurisdiction or in relation to specific software or services.
+---
 
-By using the HWID Spoofing Tool, you acknowledge that you have read, understood, and agreed to this disclaimer. If you do not agree with any part of this disclaimer, do not use the Tool.
+## 📸 Prévia da Interface
+
+![Prévia da Interface Gráfica](https://github.com/SecHex/SecHex-Spoofy/assets/96635023/22ad94a2-f003-49cb-b0ef-fea0160bd093)
+
+---
+
+## ⚠️ Isenção de Responsabilidade Legal (Disclaimer)
+
+Leia atentamente este termo antes de usar o código:
+
+1. **Uso por sua Conta e Risco**: Este software é fornecido exclusivamente para fins educacionais, de pesquisa e demonstração prática de conceitos de segurança e sistemas operacionais.
+2. **Termos de Terceiros**: A alteração de identificadores de hardware pode violar os termos de serviço (ToS) de softwares, jogos ou serviços online específicos.
+3. **Sem Garantias**: O software é disponibilizado "como está" (*as-is*), sem garantias expressas ou implícitas de qualquer natureza. O autor e colaboradores não se responsabilizam por eventuais danos, perdas de dados ou problemas operacionais decorrentes de seu uso.
+4. **Conformidade Legal**: É responsabilidade exclusiva do usuário garantir que o uso desta ferramenta esteja em conformidade com as leis vigentes de sua jurisdição.

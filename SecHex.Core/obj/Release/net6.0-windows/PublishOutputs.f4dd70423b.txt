@@ -1,0 +1,3 @@
+C:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\dist\SecHex.Core.dll
+C:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\dist\SecHex.Core.deps.json
+C:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\dist\SecHex.Core.pdb

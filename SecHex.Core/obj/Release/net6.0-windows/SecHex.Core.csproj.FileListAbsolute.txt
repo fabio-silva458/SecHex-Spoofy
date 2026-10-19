@@ -1,0 +1,12 @@
+c:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\SecHex.Core\bin\Release\net6.0-windows\SecHex.Core.deps.json
+c:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\SecHex.Core\bin\Release\net6.0-windows\SecHex.Core.dll
+c:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\SecHex.Core\bin\Release\net6.0-windows\SecHex.Core.pdb
+c:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\SecHex.Core\obj\Release\net6.0-windows\SecHex.Core.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\SecHex.Core\obj\Release\net6.0-windows\SecHex.Core.AssemblyInfoInputs.cache
+c:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\SecHex.Core\obj\Release\net6.0-windows\SecHex.Core.AssemblyInfo.cs
+c:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\SecHex.Core\obj\Release\net6.0-windows\SecHex.Core.csproj.CoreCompileInputs.cache
+c:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\SecHex.Core\obj\Release\net6.0-windows\SecHex.Core.sourcelink.json
+c:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\SecHex.Core\obj\Release\net6.0-windows\SecHex.Core.dll
+c:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\SecHex.Core\obj\Release\net6.0-windows\refint\SecHex.Core.dll
+c:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\SecHex.Core\obj\Release\net6.0-windows\SecHex.Core.pdb
+c:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\SecHex.Core\obj\Release\net6.0-windows\ref\SecHex.Core.dll

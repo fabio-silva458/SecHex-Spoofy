@@ -1,0 +1,7 @@
+C:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\dist\RPZ-HWID.exe
+C:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\dist\RPZ-HWID.dll
+C:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\dist\RPZ-HWID.deps.json
+C:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\dist\RPZ-HWID.runtimeconfig.json
+C:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\dist\RPZ-HWID.pdb
+C:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\dist\SecHex.Core.dll
+C:\Users\HOMER\Desktop\ProjetosIA\SecHex-Spoofy\dist\SecHex.Core.pdb

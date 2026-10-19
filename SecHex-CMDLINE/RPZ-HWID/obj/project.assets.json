@@ -1,0 +1,112 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0-windows7.0": {
+      "SecHex.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/SecHex.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SecHex.Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SecHex.Core/1.0.0": {
+      "type": "project",
+      "path": "../../SecHex.Core/SecHex.Core.csproj",
+      "msbuildProject": "../../SecHex.Core/SecHex.Core.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0-windows7.0": [
+      "SecHex.Core >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\HOMER\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\HOMER\\Desktop\\ProjetosIA\\SecHex-Spoofy\\SecHex-CMDLINE\\RPZ-HWID\\RPZ-HWID.csproj",
+      "projectName": "RPZ-HWID",
+      "projectPath": "C:\\Users\\HOMER\\Desktop\\ProjetosIA\\SecHex-Spoofy\\SecHex-CMDLINE\\RPZ-HWID\\RPZ-HWID.csproj",
+      "packagesPath": "C:\\Users\\HOMER\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HOMER\\Desktop\\ProjetosIA\\SecHex-Spoofy\\SecHex-CMDLINE\\RPZ-HWID\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\HOMER\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0-windows"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "projectReferences": {
+            "C:\\Users\\HOMER\\Desktop\\ProjetosIA\\SecHex-Spoofy\\SecHex.Core\\SecHex.Core.csproj": {
+              "projectPath": "C:\\Users\\HOMER\\Desktop\\ProjetosIA\\SecHex-Spoofy\\SecHex.Core\\SecHex.Core.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net6.0-windows7.0": {
+        "targetAlias": "net6.0-windows",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.36, 6.0.36]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[6.0.36, 6.0.36]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.36, 6.0.36]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.36, 6.0.36]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Users\\HOMER\\AppData\\Local\\Microsoft\\dotnet\\sdk\\8.0.426\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

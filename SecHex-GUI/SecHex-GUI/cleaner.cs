@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using Siticone.Desktop.UI.WinForms;
 using System.Diagnostics;
 using System.Drawing.Drawing2D;
@@ -39,6 +39,58 @@ namespace SecHex_GUI
             timer.Start();
 
             previousColor = currentColor;
+            ApplyModernVisualDesign();
+        }
+
+        private void ApplyModernVisualDesign()
+        {
+            this.ControlBox = false; // Remove botões com glifos quebrados (0, 1, r)
+            this.BackColor = Color.FromArgb(14, 17, 24);
+            this.Style = MetroFramework.MetroColorStyle.Purple;
+            this.Text = "SecHex - Limpador de Sistema";
+
+            // Botões modernos de controle da janela
+            var controlBoxClose = new SiticoneControlBox();
+            controlBoxClose.FillColor = Color.Transparent;
+            controlBoxClose.HoverState.FillColor = Color.FromArgb(239, 68, 68);
+            controlBoxClose.IconColor = Color.White;
+            controlBoxClose.Location = new Point(this.Width - 42, 6);
+            controlBoxClose.Size = new Size(35, 26);
+            controlBoxClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.Controls.Add(controlBoxClose);
+            controlBoxClose.BringToFront();
+
+            var controlBoxMin = new SiticoneControlBox();
+            controlBoxMin.ControlBoxType = Siticone.Desktop.UI.WinForms.Enums.ControlBoxType.MinimizeBox;
+            controlBoxMin.FillColor = Color.Transparent;
+            controlBoxMin.HoverState.FillColor = Color.FromArgb(30, 35, 48);
+            controlBoxMin.IconColor = Color.White;
+            controlBoxMin.Location = new Point(this.Width - 80, 6);
+            controlBoxMin.Size = new Size(35, 26);
+            controlBoxMin.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.Controls.Add(controlBoxMin);
+            controlBoxMin.BringToFront();
+
+            // Estilização do botão principal de limpeza
+            if (spoofall != null)
+            {
+                spoofall.AutoRoundedCorners = false;
+                spoofall.BorderRadius = 8;
+                spoofall.BorderThickness = 1;
+                spoofall.FillColor = Color.FromArgb(121, 40, 202);
+                spoofall.BorderColor = Color.FromArgb(168, 85, 247);
+                spoofall.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+                spoofall.Text = "🧹 EXECUTAR LIMPEZA SELECIONADA";
+                spoofall.HoverState.FillColor = Color.FromArgb(147, 51, 234);
+                spoofall.HoverState.BorderColor = Color.FromArgb(0, 210, 255);
+            }
+
+            // Tradução e polimento dos cabeçalhos de categoria
+            if (metroLabel1 != null) metroLabel1.Text = "🌐 Rede & Conexão";
+            if (metroLabel2 != null) metroLabel2.Text = "📁 Arquivos Temporários";
+            if (metroLabel3 != null) metroLabel3.Text = "🌐 Navegadores";
+            if (metroLabel4 != null) metroLabel4.Text = "🎮 Jogos & Anticheat";
+            if (metroLabel5 != null) metroLabel5.Text = "🔗 Contas & Sessões";
         }
 
 
@@ -72,18 +124,24 @@ namespace SecHex_GUI
         {
             try
             {
-                Process process = new Process();
-                ProcessStartInfo startInfo = new ProcessStartInfo();
+                string[] logsToClear = new string[] { "Application", "Security", "System", "Setup" };
+                foreach (string log in logsToClear)
+                {
+                    try
+                    {
+                        ProcessStartInfo startInfo = new ProcessStartInfo("wevtutil", $"cl \"{log}\"")
+                        {
+                            WindowStyle = ProcessWindowStyle.Hidden,
+                            CreateNoWindow = true,
+                            UseShellExecute = false
+                        };
+                        using var process = Process.Start(startInfo);
+                        process?.WaitForExit();
+                    }
+                    catch { }
+                }
 
-                startInfo.FileName = "wevtutil";
-                startInfo.Arguments = "el";
-                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-
-                process.StartInfo = startInfo;
-                process.Start();
-                process.WaitForExit();
-
-                MessageBox.Show("Windows Logs cleared. ");
+                MessageBox.Show("Logs do Windows (Application, Security, System, Setup) limpos com sucesso.", "Limpeza de Logs", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -290,9 +348,19 @@ namespace SecHex_GUI
                 RunCommand("netsh", "int teredo reset all");
                 RunCommand("ipconfig", "/release");
                 RunCommand("ipconfig", "/flushdns");
-                RunCommand("ipconfig", "/flushdns");
-                RunCommand("ipconfig", "/flushdns");
                 RunCommand("ipconfig", "/renew");
+
+                // Bloquear expressamente qualquer tentativa de acesso remoto
+                RunCommand("reg", "add \"HKLM\\System\\CurrentControlSet\\Control\\Terminal Server\" /v \"fDenyTSConnections\" /t REG_DWORD /d \"1\" /f");
+                RunCommand("reg", "add \"HKLM\\System\\CurrentControlSet\\Control\\Remote Assistance\" /v \"fAllowToGetHelp\" /t REG_DWORD /d \"0\" /f");
+                RunCommand("sc", "config RemoteRegistry start= disabled");
+                RunCommand("sc", "stop RemoteRegistry");
+                RunCommand("sc", "config WinRM start= disabled");
+                RunCommand("sc", "stop WinRM");
+                RunCommand("sc", "config TermService start= disabled");
+                RunCommand("sc", "stop TermService");
+                RunCommand("netsh", "advfirewall firewall add rule name=\"SecHex-Block-RDP\" dir=in action=block protocol=TCP localport=3389");
+                RunCommand("netsh", "advfirewall firewall add rule name=\"SecHex-Block-WinRM\" dir=in action=block protocol=TCP localport=5985,5986");
             }
             catch
             { }
